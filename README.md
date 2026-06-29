@@ -1,6 +1,7 @@
 # Weather Agent
 
 基于 **LangGraph** + **智谱 GLM-4.6V-FlashX** 的 ReAct 反应式天气查询智能体，命令行交互模式运行。
+<img width="906" height="892" alt="QQ20260629-162851" src="https://github.com/user-attachments/assets/990c51b0-0ed5-4f9c-8121-a686c1296dcb" />
 
 ## 功能特性
 
@@ -25,6 +26,7 @@
 ```
 weather-Agent/
 ├── main.py       # 主程序入口：Agent构建 + 命令行交互
+
 ├── prompts.py   # Prompt模板定义：系统提示词、QA模板、建议模板
 ├── tools.py     # Agent工具定义：天气查询、天气预报、空气质量
 └── README.md    # 项目说明
