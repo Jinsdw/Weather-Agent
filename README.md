@@ -24,29 +24,28 @@
 
 ```
 weather-Agent/
-├── main.py       # 全部代码（Prompt模板 + 工具定义 + Agent构建 + 命令行交互）
-└── README.md     # 项目说明
+├── main.py       # 主程序入口：Agent构建 + 命令行交互
+├── prompts.py   # Prompt模板定义：系统提示词、QA模板、建议模板
+├── tools.py     # Agent工具定义：天气查询、天气预报、空气质量
+└── README.md    # 项目说明
 ```
 
 ### 代码模块说明
 
-`main.py` 分为 4 个核心区域：
+**`prompts.py`** — Prompt 模板定义
+- `SYSTEM_PROMPT_TEMPLATE`：系统提示词，定义智能体角色与行为准则
+- `QA_RESPONSE_TEMPLATE`：QA 回答格式化模板
+- `WEATHER_SUGGESTION_PROMPT`：穿衣/出行建议生成模板
 
-1. **Prompt 模板区** — 定义了三类提示词模板
-   - `SYSTEM_PROMPT_TEMPLATE`：系统提示词，定义智能体角色与行为准则
-   - `QA_RESPONSE_TEMPLATE`：QA 回答格式化模板
-   - `WEATHER_SUGGESTION_PROMPT`：穿衣/出行建议生成模板
+**`tools.py`** — Agent 工具定义
+- `get_current_weather(city)`：查询实时天气（温度/天气/湿度/风力）
+- `get_weather_forecast(city, days)`：查询未来天气预报（1-7天）
+- `get_air_quality(city)`：查询空气质量 AQI/PM2.5
+- `TOOLS`：所有工具的统一导出列表
 
-2. **工具定义区** — 3 个 `@tool` 装饰器定义的 Agent 工具
-   - `get_current_weather(city)`：查询实时天气（温度/天气/湿度/风力）
-   - `get_weather_forecast(city, days)`：查询未来天气预报（1-7天）
-   - `get_air_quality(city)`：查询空气质量 AQI/PM2.5
-
-3. **Agent 构建区** — 使用 `create_react_agent` 创建 ReAct 智能体
-   - 通过 `ChatOpenAI` + `base_url` 接入智谱 API
-   - `MemorySaver` 提供对话记忆
-
-4. **命令行交互区** — `stream_mode="messages"` 实现逐 Token 流式输出
+**`main.py`** — 主程序入口
+- `build_agent()`：初始化智谱大模型，创建 ReAct 智能体
+- `chat_loop(agent)`：命令行交互主循环，带工具调用可视化 + 逐 Token 流式输出
 
 ## 快速开始
 
